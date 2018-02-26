@@ -74,6 +74,8 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 		encoded_image[pos++] = num;
 	}
 
+	*length_of_encoded_array = pos - 1;
+
 	free(codes);
 	return encoded_image;
 }

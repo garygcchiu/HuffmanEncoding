@@ -11,13 +11,20 @@ void store_huffman_encoded_data(char *compressed_file_name_ptr, int image_width,
 	fprintf(f, "# %d\n", max_gray_value);
 	fprintf(f, "# %d\n", number_of_nodes);
 	
+	// Writing the node pairs
 	fprintf(f, "#");
 	for(int i = number_of_nodes - 1; i >= 0; i--){
 		fprintf(f, " (%d, %d)", huffman_node[i].first_value, huffman_node[i].second_value);
 	}
 	fprintf(f, "\n");
 	
+	// Writing the encoding
 	fprintf(f, "# %ld\n", length_of_encoded_image);
 
 	fwrite(encoded_image, sizeof(unsigned char), length_of_encoded_image, f);
+	
+	fclose(f);
+
+	free(huffman_node);
+	free(encoded_image);
 }
