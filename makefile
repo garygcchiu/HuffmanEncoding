@@ -233,18 +233,20 @@ testCompression: pgm_huffman_encode
 	@echo "----------------------------------------"
 	@echo "Generating  Huffman compressed images"
 	@echo 
-	# ./pgm_huffman_encode small.pgm test_square.comp
-	./pgm_huffman_encode test_square.raw.pgm test_square.comp
-	ls -l                test_square.raw.pgm test_square.comp
+	./pgm_huffman_encode gradient.pgm gradient.comp
+	ls -l                gradient.pgm gradient.comp
+
+	# ./pgm_huffman_encode test_square.raw.pgm test_square.comp
+	# ls -l                test_square.raw.pgm test_square.comp
 	@echo "----------------------------------------"
-	./pgm_huffman_encode rectangle_2.raw.pgm rectangle.comp
-	ls -l                rectangle_2.raw.pgm rectangle.comp
-	@echo "----------------------------------------"
-	./pgm_huffman_encode boats.raw.pgm       boats.comp
-	ls -l                boats.raw.pgm       boats.comp
-	@echo "----------------------------------------"
-	./pgm_huffman_encode smooth.raw.pgm      smooth.comp
-	ls -l                smooth.raw.pgm      smooth.comp
+	# ./pgm_huffman_encode rectangle_2.raw.pgm rectangle.comp
+	# ls -l                rectangle_2.raw.pgm rectangle.comp
+	# @echo "----------------------------------------"
+	# ./pgm_huffman_encode boats.raw.pgm       boats.comp
+	# ls -l                boats.raw.pgm       boats.comp
+	# @echo "----------------------------------------"
+	# ./pgm_huffman_encode smooth.raw.pgm      smooth.comp
+	# ls -l                smooth.raw.pgm      smooth.comp
 	@echo "----------------------------------------"
 
 testDecompression: pgm_huffman_decode
