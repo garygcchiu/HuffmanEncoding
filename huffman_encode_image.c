@@ -65,8 +65,6 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 	char cur_char;				// current character of encoding
 	int p;						// position in the encoding
 
-	int COUNT = 0;
-
 	for(int i = 0; i < input_pgm_image->height; i++){
 		for(int j = 0; j < input_pgm_image->width; j++){
 
@@ -99,14 +97,16 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 		}
 	}
 
-	printf("here");
-
 	// Dealing with the final encoding, need to move it to the left by shifting it
 	// an appropriate number of times
 	if(cur_shift != 0){
 		while(cur_shift != 0){
 			num = num << 1;
 			cur_shift++;
+
+			if(cur_shift == 8){
+				cur_shift = 0;
+			}
 		}
 		encoded_image[pos++] = num;
 	}
