@@ -24,7 +24,6 @@ void store_huffman_encoded_data(char *compressed_file_name_ptr, int image_width,
 
 	// Writing encoding
 	for(int i = 0; i < length_of_encoded_image; i++){
-		// printf("%d\n", encoded_image[i]);
 		fprintf(f, "%x", encoded_image[i]);
 	}
 
