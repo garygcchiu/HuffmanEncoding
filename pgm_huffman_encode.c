@@ -37,8 +37,6 @@ int main(int argc, char *argv[]){
 	unsigned char* encoding = huffman_encode_image(image, nodes, 
 		number_of_non_zero_values_in_the_frequency_array - 1, &length_of_encoded_array);
 
-	printf("Exiting encoding\n\n");
-	
 	// storing the encoding
 	store_huffman_encoded_data(argv[2], image->width, image->height, MAX_GRAY_VALUE, 
 		number_of_non_zero_values_in_the_frequency_array - 1, nodes, 

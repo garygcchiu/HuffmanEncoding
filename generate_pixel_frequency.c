@@ -18,8 +18,6 @@ long int *generate_pixel_frequency(struct PGM_Image *input_pgm_image,
 			}
 			// Increase the count of pixels with this intensity
 			pixels[cur]++;
-
-
 		}
 	}
 	return pixels;

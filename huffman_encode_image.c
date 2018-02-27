@@ -44,15 +44,15 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 
 
 	//* Debugging: Print the huffman codes *//
-	for(int i = 0; i < MAX_GRAY_VALUE + 1; i ++){
-		if(codes[i][0] != 0){
-			printf("\n\n---- %d %d ---- \n", i, codes[i][0]);
-			for(int j = 1; j <= codes[i][0]; j++){
-				printf("%c", codes[i][j]);
-			}
-			printf("\n");
-		}
-	}
+	// for(int i = 0; i < MAX_GRAY_VALUE + 1; i ++){
+	// 	if(codes[i][0] != 0){
+	// 		printf("\n\n---- %d %d ---- \n", i, codes[i][0]);
+	// 		for(int j = 1; j <= codes[i][0]; j++){
+	// 			printf("%c", codes[i][j]);
+	// 		}
+	// 		printf("\n");
+	// 	}
+	// }
 
 
 	unsigned char* encoded_image = calloc(input_pgm_image->width * input_pgm_image->height, 
@@ -72,8 +72,7 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 			// get the generated code for this intensity
 			code = codes[input_pgm_image->image[i][j]];
 
-			printf("\nValue: %d\n", input_pgm_image->image[i][j]);
-			// printf("%s\n\n", code);
+			// printf("\nValue: %d\n", input_pgm_image->image[i][j]);
 
 			for(p = 0; p <= code[0]; p++){
 				cur_char = code[p];
