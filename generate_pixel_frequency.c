@@ -12,13 +12,14 @@ long int *generate_pixel_frequency(struct PGM_Image *input_pgm_image,
 
 			int cur = input_pgm_image->image[i][j];
 			
+			// Increment the number of non zero values if applicable
+			if(cur != 0 && pixels[cur] == 0){
+				(*number_of_non_zero_values_in_the_frequency_array)++;
+			}
 			// Increase the count of pixels with this intensity
 			pixels[cur]++;
 
-			// Increment the number of non zero values if applicable
-			if(cur != 0){
-				(*number_of_non_zero_values_in_the_frequency_array)++;
-			}
+
 		}
 	}
 	return pixels;

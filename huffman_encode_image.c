@@ -4,26 +4,57 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 	int number_of_nodes, unsigned long int *length_of_encoded_array){
 
 	// Go through and set all of the codes to be 0 by default
-	char** codes = malloc(MAX_GRAY_VALUE + 1 * sizeof(char));	
+	char** codes = malloc((MAX_GRAY_VALUE + 1) * sizeof(char*));	
 	for(int i = 0; i < MAX_GRAY_VALUE + 1; i ++){
-		*(codes[i]) = '0';
+		codes[i] = malloc(sizeof(char) * 17);
+		codes[i][0] = 0;
 	}
 
 	// Generate the codes for each intensity
 	struct node cur;
+	int uninitialized;
+	int initialized;
 	for(int i = number_of_nodes - 1; i >= 0; i--){
 		cur = huffman_node[i];
 
-		// We are always setting the larger number to be 1 concatenated on to the first
-		// while the first is simply shifted to the left by 1
-		*(codes[cur.second_value]) = (*codes[cur.first_value]) + '1';
-		*(codes[cur.first_value]) = (*codes[cur.first_value]) + '0';
+		// printf("Node: %d %d\n\n", cur.first_value, cur.second_value);
+
+		if(codes[cur.first_value][0] == 0){
+			uninitialized = cur.first_value;
+			initialized = cur.second_value;
+		} else {
+			initialized = cur.first_value;
+			uninitialized = cur.second_value;
+		}
+
+		// Copying the code for the first value to the second
+		for(int j = 1; j <= codes[initialized][0]; j++){
+			// number of elements in the code
+			codes[uninitialized][0] += 1;
+			// using position in the code and code from first one (being copied)	
+			codes[uninitialized][(int)(codes[uninitialized][0])] = codes[initialized][j];
+		}
+
+		codes[uninitialized][0] += 1;
+		codes[uninitialized][(int)(codes[uninitialized][0])] = '1';
+
+		codes[initialized][0] += 1;
+		codes[initialized][(int)(codes[initialized][0])] = '0';
 	}
 
-	// Go through and add EOF to the end of all of the strings so we know when to stop.
+
 	for(int i = 0; i < MAX_GRAY_VALUE + 1; i ++){
-		*(codes[i]) = *(codes[i]) + EOF;
+		if(codes[i][0] != 0){
+			printf("\n\n---- %d %d ---- \n", i, codes[i][0]);
+			for(int j = 1; j <= codes[i][0]; j++){
+				printf("%c", codes[i][j]);
+			}
+			printf("\n");
+		}
 	}
+	printf("############# %d\n\n", number_of_nodes);
+
+	return NULL;
 
 	unsigned char* encoded_image = calloc(input_pgm_image->width * input_pgm_image->height, 
 		sizeof(unsigned char));
@@ -76,6 +107,9 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 
 	*length_of_encoded_array = pos - 1;
 
+	for(int i = 0; i < MAX_GRAY_VALUE + 1; i ++){
+		free(codes[i]);
+	}
 	free(codes);
 	return encoded_image;
 }

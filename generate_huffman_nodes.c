@@ -34,23 +34,25 @@ struct node *generate_huffman_nodes(long int *pixel_frequency, int max_gray_valu
 		cur_min2 = LONG_MAX;
 
 		// Go through all fo the elements searching for the lowest two
-		for(int p = 0; p < MAX_GRAY_VALUE; p++){
-			if(pixel_frequency[p] < cur_min1){
+		for(int p = 0; p < MAX_GRAY_VALUE + 1; p++){
+			if(pixel_frequency[p] != 0){
+				if(pixel_frequency[p] < cur_min1){
 
-				// Set second lowest to previous lowest
-				cur_min2 = cur_min1;
-				cur_pos2 = cur_pos1;
+					// Set second lowest to previous lowest
+					cur_min2 = cur_min1;
+					cur_pos2 = cur_pos1;
 
-				// Set new lowest
-				cur_min1 = pixel_frequency[p];
-				cur_pos1 = p;
+					// Set new lowest
+					cur_min1 = pixel_frequency[p];
+					cur_pos1 = p;
 
-			} else if (pixel_frequency[p] < cur_min2){
+				} else if (pixel_frequency[p] < cur_min2){
 
-				// Set new second lowest
-				cur_min2 = pixel_frequency[p];
-				cur_pos2 = p;
+					// Set new second lowest
+					cur_min2 = pixel_frequency[p];
+					cur_pos2 = p;
 
+				}
 			}
 		}
 

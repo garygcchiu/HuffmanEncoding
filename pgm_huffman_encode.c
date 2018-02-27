@@ -16,8 +16,6 @@ int main(int argc, char *argv[]){
 		exit(0);
 	}
 
-	printf("here 1\n\n");
-
 	// loading the pgm image
 	struct PGM_Image* image = malloc(sizeof(struct PGM_Image)); 
 	if(load_PGM_Image(image, argv[1]) == -1){
@@ -25,27 +23,21 @@ int main(int argc, char *argv[]){
 		exit(0);
 	}
 
-	printf("here 2\n\n");
-
 	// generating pixel frequencies
 	int number_of_non_zero_values_in_the_frequency_array = 0;
 	long int *frequencies = generate_pixel_frequency(image, 
 		&number_of_non_zero_values_in_the_frequency_array);
-	
-	printf("here 3\n\n");
 
 	// generating huffman nodes
 	struct node* nodes = generate_huffman_nodes(frequencies, MAX_GRAY_VALUE, 
 		number_of_non_zero_values_in_the_frequency_array);
-
-	printf("here 4\n\n");
 
 	// generating the encoding
 	unsigned long int length_of_encoded_array = 0;
 	unsigned char* encoding = huffman_encode_image(image, nodes, 
 		number_of_non_zero_values_in_the_frequency_array - 1, &length_of_encoded_array);
 
-	printf("here 5\n\n");
+	printf("Exiting encoding\n\n");
 	
 	// storing the encoding
 	store_huffman_encoded_data(argv[2], image->width, image->height, MAX_GRAY_VALUE, 
