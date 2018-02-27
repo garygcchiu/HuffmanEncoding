@@ -233,11 +233,12 @@ testCompression: pgm_huffman_encode
 	@echo "----------------------------------------"
 	@echo "Generating  Huffman compressed images"
 	@echo 
+	./pgm_huffman_encode small.pgm test_square.comp
 	# ./pgm_huffman_encode test_square.raw.pgm test_square.comp
 	# ls -l                test_square.raw.pgm test_square.comp
 	# @echo "----------------------------------------"
-	./pgm_huffman_encode rectangle_2.raw.pgm rectangle.comp
-	ls -l                rectangle_2.raw.pgm rectangle.comp
+	# ./pgm_huffman_encode rectangle_2.raw.pgm rectangle.comp
+	# ls -l                rectangle_2.raw.pgm rectangle.comp
 	# @echo "----------------------------------------"
 	# ./pgm_huffman_encode boats.raw.pgm       boats.comp
 	# ls -l                boats.raw.pgm       boats.comp
@@ -286,6 +287,7 @@ testAll:
 #Clean all objected files and the executable file
 clean:
 	rm -f *.o
+	rm -f *.comp
 	rm -f  pgm_huffman_encode  pgm_huffman_decode compare_pgm_images
 
 

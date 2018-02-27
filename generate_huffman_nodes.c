@@ -27,7 +27,7 @@ struct node *generate_huffman_nodes(long int *pixel_frequency, int max_gray_valu
 
 	struct node* n;
 
-	for(int i = 0; i < number_of_non_zero_values_in_the_frequency_array - 1; i++){
+	for(int i = 0; i < number_of_non_zero_values_in_the_frequency_array; i++){
 		
 		// Set the current minimum values to be infinity
 		cur_min1 = LONG_MAX;
