@@ -233,12 +233,15 @@ testCompression: pgm_huffman_encode
 	@echo "----------------------------------------"
 	@echo "Generating  Huffman compressed images"
 	@echo 
+	# ./pgm_huffman_encode gradient_small.pgm gradient_small.comp
+	# ls -l                gradient_small.pgm gradient_small.comp
+	
 	./pgm_huffman_encode gradient.pgm gradient.comp
 	ls -l                gradient.pgm gradient.comp
 
 	# ./pgm_huffman_encode test_square.raw.pgm test_square.comp
 	# ls -l                test_square.raw.pgm test_square.comp
-	@echo "----------------------------------------"
+	# @echo "----------------------------------------"
 	# ./pgm_huffman_encode rectangle_2.raw.pgm rectangle.comp
 	# ls -l                rectangle_2.raw.pgm rectangle.comp
 	# @echo "----------------------------------------"
@@ -247,7 +250,7 @@ testCompression: pgm_huffman_encode
 	# @echo "----------------------------------------"
 	# ./pgm_huffman_encode smooth.raw.pgm      smooth.comp
 	# ls -l                smooth.raw.pgm      smooth.comp
-	@echo "----------------------------------------"
+	# @echo "----------------------------------------"
 
 testDecompression: pgm_huffman_decode
 #

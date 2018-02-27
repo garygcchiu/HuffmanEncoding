@@ -35,3 +35,15 @@ void store_huffman_encoded_data(char *compressed_file_name_ptr, int image_width,
 	free(huffman_node);
 	free(encoded_image);
 }
+
+
+
+/*
+
+For the simple gradient I expect:
+0100 1110 1100
+
+4ec
+
+*/
+
