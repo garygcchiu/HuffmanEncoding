@@ -17,8 +17,7 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 	for(int i = number_of_nodes; i >= 0; i--){
 		cur = huffman_node[i];
 
-		// printf("Node: %d %d\n\n", cur.first_value, cur.second_value);
-
+		// Find the node which has not yet been added to the huffman tree
 		if(codes[cur.first_value][0] == 0){
 			uninitialized = cur.first_value;
 			initialized = cur.second_value;
@@ -35,6 +34,7 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 			codes[uninitialized][(int)(codes[uninitialized][0])] = codes[initialized][j];
 		}
 
+		// Updating the codes for these symbols
 		codes[uninitialized][0] += 1;
 		codes[uninitialized][(int)(codes[uninitialized][0])] = '1';
 
@@ -58,13 +58,11 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 		sizeof(unsigned char));
 
 	char* code;					// the code generated above for a particular intensity
-	unsigned char num = 0;	// the current unsigned char (encoded)
+	unsigned char num = 0;		// the current unsigned char (encoded)
 	int pos = 0;				// number of encoded items
 	int cur_shift = 0;			// number of bits encoded for current encoding
 	char cur_char;				// current character of encoding
 	int p;						// position in the encoding
-
-	// printf("\n--------\n");
 
 	for(int i = 0; i < input_pgm_image->height; i++){
 		for(int j = 0; j < input_pgm_image->width; j++){
@@ -72,19 +70,13 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 			
 			// get the generated code for this intensity
 			code = codes[input_pgm_image->image[i][j]];
-			// printf("\nCode to encode: %s\n", code);
-
-			// printf("\nValue: %d\n", input_pgm_image->image[i][j]);
 
 			for(p = 1; p <= code[0]; p++){
 				cur_char = code[p];
 
-				// printf("  Current char: %c\n", cur_char);
-
 				// once we reach 4 bits we have reached the limit of a single unsigned char
 				if(cur_shift == 4){
 
-					// printf(" Encoded: %x\n", num);
 					// add to the encoded image and rest
 					encoded_image[pos++] = num;
 					num = 0;
@@ -97,8 +89,6 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 					num += 1;
 				}
 				cur_shift++;
-
-				// printf("\t\t%x\n", num);
 			}
 		}
 	}
@@ -114,7 +104,6 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 				cur_shift++;
 			}
 		}
-		// printf(" Encoded: %x\n", num);
 		encoded_image[pos++] = num;
 	}
 

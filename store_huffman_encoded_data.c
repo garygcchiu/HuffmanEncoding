@@ -5,9 +5,9 @@ void store_huffman_encoded_data(char *compressed_file_name_ptr, int image_width,
 	int image_height, int max_gray_value, int number_of_nodes, struct node *huffman_node, 
 	long int length_of_encoded_image, unsigned char *encoded_image){
 
-	// Writing header info
 	FILE *f = fopen(compressed_file_name_ptr, "wb");
 
+	// Writing header info
 	struct header* file_header = malloc(sizeof(struct header));
 	file_header->image_width = image_width;
 	file_header->image_height = image_height;

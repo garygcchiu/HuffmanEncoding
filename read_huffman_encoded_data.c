@@ -23,17 +23,12 @@ unsigned char *read_huffman_encoded_data(char *compressed_file_name_ptr, int *im
 		fread(huffman_node[i], sizeof(struct node), 1, f);
 	}
 
-	printf("\n\n");
-	for(int i = 0; i < file_header->number_of_nodes; i++){
-		printf("%d %d \n", huffman_node[i]->first_value, huffman_node[i]->second_value);
-	}
-
 	// Read in encoded text
-	unsigned char* encoded_text = malloc(sizeof(unsigned char) * (*length_of_encoded_image));
-	fread(encoded_text, sizeof(unsigned char), *length_of_encoded_image, f);
+	unsigned char* encoded_image = malloc(sizeof(unsigned char) * (*length_of_encoded_image));
+	fread(encoded_image, sizeof(unsigned char), *length_of_encoded_image, f);
 
 	fclose(f);
 	free(file_header);
 
-	return encoded_text;
+	return encoded_image;
 }
