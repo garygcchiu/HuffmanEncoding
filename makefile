@@ -233,11 +233,11 @@ testCompression: pgm_huffman_encode
 	@echo "----------------------------------------"
 	@echo "Generating  Huffman compressed images"
 	@echo 
-	# ./pgm_huffman_encode gradient_small.pgm gradient_small.comp
-	# ls -l                gradient_small.pgm gradient_small.comp
+	./pgm_huffman_encode gradient_small.pgm gradient_small.comp
+	ls -l                gradient_small.pgm gradient_small.comp
 	
-	./pgm_huffman_encode gradient.pgm gradient.comp
-	ls -l                gradient.pgm gradient.comp
+	# ./pgm_huffman_encode gradient.pgm gradient.comp
+	# ls -l                gradient.pgm gradient.comp
 
 	# ./pgm_huffman_encode test_square.raw.pgm test_square.comp
 	# ls -l                test_square.raw.pgm test_square.comp
@@ -257,14 +257,15 @@ testDecompression: pgm_huffman_decode
 # Generating Huffman decompressed images
 #
 	@echo "----------------------------------------"
-	./pgm_huffman_decode test_square.comp    test_square.decomp.pgm
-	@echo "----------------------------------------"
-	./pgm_huffman_decode rectangle.comp      rectangle.decomp.pgm
-	@echo "----------------------------------------"
-	./pgm_huffman_decode boats.comp          boats.decomp.pgm
-	@echo "----------------------------------------"
-	./pgm_huffman_decode smooth.comp         smooth.decomp.pgm
-	@echo "----------------------------------------"
+	./pgm_huffman_decode gradient_small.comp    gradient_small.pgm
+	# ./pgm_huffman_decode test_square.comp    test_square.decomp.pgm
+	# @echo "----------------------------------------"
+	# ./pgm_huffman_decode rectangle.comp      rectangle.decomp.pgm
+	# @echo "----------------------------------------"
+	# ./pgm_huffman_decode boats.comp          boats.decomp.pgm
+	# @echo "----------------------------------------"
+	# ./pgm_huffman_decode smooth.comp         smooth.decomp.pgm
+	# @echo "----------------------------------------"
 
 testComparingImages: compare_pgm_images
 #

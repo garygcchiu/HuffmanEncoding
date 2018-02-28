@@ -4,6 +4,7 @@
 #include <string.h>
 #include "libpnm.h"
 #include "generate_huffman_nodes.h"
+#include "store_huffman_encoded_data.h"
 
 #ifndef _READ_HUFFMAN_ENCODED_DATA_
 #define _READ_HUFFMAN_ENCODED_DATA_

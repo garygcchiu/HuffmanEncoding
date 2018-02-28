@@ -6,44 +6,32 @@ void store_huffman_encoded_data(char *compressed_file_name_ptr, int image_width,
 	long int length_of_encoded_image, unsigned char *encoded_image){
 
 	// Writing header info
-	FILE *f = fopen(compressed_file_name_ptr, "w");
-	fprintf(f, "# %d\n", image_width);
-	fprintf(f, "# %d\n", image_height);
-	fprintf(f, "# %d\n", max_gray_value);
-	fprintf(f, "# %d\n", number_of_nodes);
-	
-	// Writing the node pairs
-	fprintf(f, "#");
-	for(int i = number_of_nodes; i >= 0; i--){
-		fprintf(f, " %d,%d", huffman_node[i].first_value, huffman_node[i].second_value);
-	}
-	fprintf(f, "\n");
-	
-	// Writing the encoding length
-	fprintf(f, "# %ld\n", length_of_encoded_image);
+	FILE *f = fopen(compressed_file_name_ptr, "wb");
 
-	// Writing encoding
-	for(int i = 0; i < length_of_encoded_image; i++){
-		fprintf(f, "%x", encoded_image[i]);
+	struct header* file_header = malloc(sizeof(struct header));
+	file_header->image_width = image_width;
+	file_header->image_height = image_height;
+	file_header->max_gray_value = max_gray_value;
+	file_header->number_of_nodes = number_of_nodes;
+	file_header->length_of_encoded_image = length_of_encoded_image;
+
+	fwrite(file_header, sizeof(struct header), 1, f);
+
+	// Writing the huffman nodes
+	for(int i = 0; i < number_of_nodes; i++){
+		fwrite(&huffman_node[i], sizeof(struct node), 1, f);
 	}
 
-	// fseek(f, 0, SEEK_END);
-	// fwrite(encoded_image, sizeof(unsigned char), length_of_encoded_image, f);
+	// Writing the encoded image
+	fwrite(encoded_image, sizeof(unsigned char), length_of_encoded_image, f);
 
 	fclose(f);
 
+	free(file_header);
 	free(huffman_node);
 	free(encoded_image);
 }
 
 
 
-/*
-
-For the simple gradient I expect:
-0100 1110 1100
-
-4ec
-
-*/
 
