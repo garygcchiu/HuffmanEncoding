@@ -20,20 +20,20 @@ unsigned char *read_huffman_encoded_data(char *compressed_file_name_ptr, int *im
 	*huffman_node = malloc(sizeof(struct node*) * (*number_of_nodes));
 	for(int i = 0; i < *number_of_nodes; i++){
 		huffman_node[i] = malloc(sizeof(struct node));
-		fread(huffman_node[i], sizeof(struct node), 1, f);
+		huffman_node[i]->first_value = 1;
+		huffman_node[i]->second_value = 2;
+		// fread(huffman_node[i], sizeof(struct node), 1, f);
 	}
 
-
-	printf("%d\n", *number_of_nodes);
-
-
-
+	printf("\n");
+	for(int i = 0; i < file_header->number_of_nodes; i++){
+		printf("%d %d\n", huffman_node[i]->first_value, huffman_node[i]->second_value);
+	}
 
 	// Read in encoded text
 	unsigned char* encoded_image = malloc(sizeof(unsigned char) * (*length_of_encoded_image));
 	fread(encoded_image, sizeof(unsigned char), *length_of_encoded_image, f);
 
 	fclose(f);
-	free(file_header);
 	return encoded_image;
 }

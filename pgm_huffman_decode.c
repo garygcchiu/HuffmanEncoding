@@ -21,28 +21,29 @@ int main(int argc, char *argv[]){
 		printf("Please ensure you have entered a valid compressed file.\n");
 		exit(0);
 	}
-
-	struct node** huffman_node = malloc(sizeof(struct node**));
+	unsigned char* encoded_image;
 	struct header* file_header = malloc(sizeof(struct header));
+	struct node** huffman_node = malloc(sizeof(struct node**));
 
 	// Loading in from the input file
-	unsigned char* encoded_image;
 	encoded_image = read_huffman_encoded_data(argv[1], &(file_header->image_width), &(file_header->image_height), 
 		&(file_header->max_gray_value), &(file_header->number_of_nodes), huffman_node, 
 		&(file_header->length_of_encoded_image));
 	
+	printf("\n");
+	for(int i = 0; i < file_header->number_of_nodes; i++){
+		printf("%d %d\n", huffman_node[i]->first_value, huffman_node[i]->second_value);
+	}
 
-	/*
 	// Decoding the image
 	struct PGM_Image* image;
 	image = huffman_decode_image(file_header->image_width, file_header->image_height, 
 		file_header->max_gray_value, file_header->number_of_nodes, *huffman_node, 
 		file_header->length_of_encoded_image, encoded_image);
 	
-	// char* t = "gradient_small.decomp.pgm";
 	// Save the image
-	// save_PGM_Image(image, argv[2], 1);
-	*/
+	save_PGM_Image(image, argv[2], 1);
+	
 
 	return 0;
 }

@@ -12,12 +12,20 @@ struct PGM_Image *huffman_decode_image(int image_width, int image_height,
 		all_nodes[i]->value = -1;
 	}
 
+	printf("\n");
+	for(int i = 0; i < number_of_nodes; i++){
+		printf("%d %d\n", huffman_node[i].first_value, huffman_node[i].second_value);
+	}
+
+	// printf("%d %d \n", image_width, image_height);
+
 	int left_val;
 	int right_val;
 	struct tree_node* left;
 	struct tree_node* right;
 	struct tree_node* linker;
-	for(int i = 0; i < number_of_nodes * 2; i += 2){
+	for(int i = 0; i < number_of_nodes; i++){
+
 		/*
 		* first_value is always added to the left (the 0 path)
 		* second_value is always added to the right (the 1 path)
@@ -26,6 +34,9 @@ struct PGM_Image *huffman_decode_image(int image_width, int image_height,
 		// Getting the existing nodes
 		left_val = huffman_node[i].first_value;
 		right_val = huffman_node[i].second_value;
+
+
+		// printf("%d %d\n", left_val, right_val);
 
 		left = all_nodes[left_val];
 		right = all_nodes[right_val];
@@ -49,6 +60,7 @@ struct PGM_Image *huffman_decode_image(int image_width, int image_height,
 		all_nodes[right_val] = linker;
 	}
 	root = linker;
+
 
 	// Creating the image
 	struct PGM_Image* image = malloc(sizeof(struct PGM_Image));
@@ -93,8 +105,5 @@ struct PGM_Image *huffman_decode_image(int image_width, int image_height,
 		}
 	}
 	free(all_nodes);
-	free(left);
-	free(right);
-	free(linker);
 	return image;
 }
