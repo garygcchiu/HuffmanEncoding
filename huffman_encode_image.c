@@ -14,7 +14,7 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 	struct node cur;
 	int uninitialized;
 	int initialized;
-	for(int i = number_of_nodes; i >= 0; i--){
+	for(int i = number_of_nodes - 1; i >= 0; i--){
 		cur = huffman_node[i];
 
 		// Find the node which has not yet been added to the huffman tree
@@ -25,6 +25,9 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 			initialized = cur.first_value;
 			uninitialized = cur.second_value;
 		}
+
+		huffman_node[i].first_value = initialized;
+		huffman_node[i].second_value = uninitialized;
 
 		// Copying the code for the first value to the second
 		for(int j = 1; j <= codes[initialized][0]; j++){
@@ -44,15 +47,14 @@ unsigned char *huffman_encode_image(struct PGM_Image *input_pgm_image, struct no
 
 	//* Debugging: Print the huffman codes *//
 	// for(int i = 0; i < MAX_GRAY_VALUE + 1; i++){
-		// if(codes[i][0] != 0){
-			// printf("\n\n---- %d %d ---- \n", i, codes[i][0]);
-			// for(int j = 1; j <= codes[i][0]; j++){
-				// printf("%c", codes[i][j]);
-			// }
-			// printf("\n");
-		// }
+	// 	if(codes[i][0] != 0){
+	// 		printf("\n\n---- %d %d ---- \n", i, codes[i][0]);
+	// 		for(int j = 1; j <= codes[i][0]; j++){
+	// 			printf("%c", codes[i][j]);
+	// 		}
+	// 		printf("\n");
+	// 	}
 	// }
- 
 
 	unsigned char* encoded_image = calloc(10 * input_pgm_image->width * input_pgm_image->height, 
 		sizeof(unsigned char));

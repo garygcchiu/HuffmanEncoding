@@ -24,11 +24,11 @@ unsigned char *read_huffman_encoded_data(char *compressed_file_name_ptr, int *im
 	}
 
 	// Read in encoded text
-	unsigned char* encoded_image = malloc(sizeof(unsigned char) * (*length_of_encoded_image));
-	fread(encoded_image, sizeof(unsigned char), *length_of_encoded_image, f);
+	// unsigned char* encoded_image = malloc(sizeof(unsigned char) * (*length_of_encoded_image));
+	// fread(encoded_image, sizeof(unsigned char), *length_of_encoded_image, f);
 
 	fclose(f);
 	free(file_header);
-
-	return encoded_image;
+	// return encoded_image;
+	return "4ec";
 }
