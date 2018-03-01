@@ -271,6 +271,7 @@ testComparingImages: compare_pgm_images
 #
 # Comparing images
 #
+	./compare_pgm_images gradient_small.pgm gradient_small.decomp.pgm
 	@echo "----------------------------------------"
 	./compare_pgm_images test_square.raw.pgm test_square.decomp.pgm
 	@echo "----------------------------------------"
