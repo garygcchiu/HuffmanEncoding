@@ -12,13 +12,6 @@ struct PGM_Image *huffman_decode_image(int image_width, int image_height,
 		all_nodes[i]->value = -1;
 	}
 
-	// printf("\n");
-	// for(int i = 0; i < number_of_nodes; i++){
-		// printf("%d %d\n", huffman_node[i]->first_value, huffman_node[i]->second_value);
-	// }
-
-	// printf("%d %d \n", image_width, image_height);
-
 	int left_val;
 	int right_val;
 	struct tree_node* left;
@@ -35,8 +28,6 @@ struct PGM_Image *huffman_decode_image(int image_width, int image_height,
 		left_val = huffman_node[i]->first_value;
 		right_val = huffman_node[i]->second_value;
 
-
-		// printf("%d %d\n", left_val, right_val);
 
 		left = all_nodes[left_val];
 		right = all_nodes[right_val];

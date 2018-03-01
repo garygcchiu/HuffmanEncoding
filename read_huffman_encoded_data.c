@@ -17,16 +17,12 @@ unsigned char *read_huffman_encoded_data(char *compressed_file_name_ptr, int *im
 	*length_of_encoded_image = file_header->length_of_encoded_image;
 
 	// Getting all of the huffman nodes
-	*huffman_node = malloc(sizeof(struct node*) * (*number_of_nodes));
+	*huffman_node = malloc(sizeof(struct node) * (*number_of_nodes));
 	for(int i = 0; i < *number_of_nodes; i++){
 		huffman_node[i] = malloc(sizeof(struct node));
 		fread(huffman_node[i], sizeof(struct node), 1, f);
+		// printf("%d / %d : %d %d\n", i, *number_of_nodes, huffman_node[i]->first_value, huffman_node[i]->second_value);
 	}
-
-	// printf("\n");
-	// for(int i = 0; i < file_header->number_of_nodes; i++){
-		// printf("%d %d\n", huffman_node[i]->first_value, huffman_node[i]->second_value);
-	// }
 
 	// Read in encoded text
 	unsigned char* encoded_image = malloc(sizeof(unsigned char) * (*length_of_encoded_image));

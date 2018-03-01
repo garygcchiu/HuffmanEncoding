@@ -250,7 +250,15 @@ testDecompression: pgm_huffman_decode
 #
 # Generating Huffman decompressed images
 #
+	@echo "----------------------------------------"
+	./pgm_huffman_decode test_square.comp    test_square.decomp.pgm
+	@echo "----------------------------------------"
 	./pgm_huffman_decode rectangle.comp      rectangle.decomp.pgm
+	@echo "----------------------------------------"
+	./pgm_huffman_decode boats.comp          boats.decomp.pgm
+	@echo "----------------------------------------"
+	./pgm_huffman_decode smooth.comp         smooth.decomp.pgm
+	@echo "----------------------------------------"
 
 testComparingImages: compare_pgm_images
 #
