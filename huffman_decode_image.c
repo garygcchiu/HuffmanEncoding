@@ -6,7 +6,7 @@ struct PGM_Image *huffman_decode_image(int image_width, int image_height,
 
 	// Creating tree nodes and initializing values to -1 (to know which values have not been used)
 	struct tree_node* root;
-	struct tree_node** all_nodes = malloc(sizeof(struct tree_node) * max_gray_value + 1);
+	struct tree_node** all_nodes = malloc(sizeof(struct tree_node) * (max_gray_value + 1));
 	for(int i = 0; i < max_gray_value + 1; i++){
 		all_nodes[i] = malloc(sizeof(struct tree_node));
 		all_nodes[i]->value = -1;

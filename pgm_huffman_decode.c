@@ -22,8 +22,6 @@ int main(int argc, char *argv[]){
 		exit(0);
 	}
 
-	// char* test = "test123";
-
 	struct node* huffman_nodes;
 	struct header* file_header = malloc(sizeof(struct header));
 
@@ -33,17 +31,16 @@ int main(int argc, char *argv[]){
 		&(file_header->max_gray_value), &(file_header->number_of_nodes), &huffman_nodes, 
 		&(file_header->length_of_encoded_image));
 	
-	// printf("\n\n\n --- %s ---\n\n\n", test);
-	// return 0;
-	// printf("here\n");
 	// Decoding the image
 	struct PGM_Image* image;
 	image = huffman_decode_image(file_header->image_width, file_header->image_height, 
 		file_header->max_gray_value, file_header->number_of_nodes, huffman_nodes, 
 		file_header->length_of_encoded_image, encoded_image);
 	
+	char* t = "gradient_small.decomp.pgm";
 	// Save the image
 	// save_PGM_Image(image, argv[2], 1);
+	save_PGM_Image(image, t, 1);
 
 	return 0;
 }

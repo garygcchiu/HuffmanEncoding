@@ -257,7 +257,7 @@ testDecompression: pgm_huffman_decode
 # Generating Huffman decompressed images
 #
 	@echo "----------------------------------------"
-	./pgm_huffman_decode gradient_small.comp    gradient_small_new.pgm
+	./pgm_huffman_decode gradient_small.comp    gradient_small.decomp.pgm
 	# ./pgm_huffman_decode test_square.comp    test_square.decomp.pgm
 	# @echo "----------------------------------------"
 	# ./pgm_huffman_decode rectangle.comp      rectangle.decomp.pgm
