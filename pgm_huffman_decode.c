@@ -38,7 +38,7 @@ int main(int argc, char *argv[]){
 	// Decoding the image
 	struct PGM_Image* image;
 	image = huffman_decode_image(file_header->image_width, file_header->image_height, 
-		file_header->max_gray_value, file_header->number_of_nodes, *huffman_node, 
+		file_header->max_gray_value, file_header->number_of_nodes, huffman_node, 
 		file_header->length_of_encoded_image, encoded_image);
 	
 	// Save the image

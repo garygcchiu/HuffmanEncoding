@@ -234,19 +234,28 @@ testCompression: pgm_huffman_encode
 	@echo "Generating  Huffman compressed images"
 	@echo 
 	./pgm_huffman_encode test_square.raw.pgm test_square.comp
+	ls -l                test_square.raw.pgm test_square.comp
+	@echo "----------------------------------------"
+	./pgm_huffman_encode rectangle_2.raw.pgm rectangle.comp
+	ls -l                rectangle_2.raw.pgm rectangle.comp
+	@echo "----------------------------------------"
+	./pgm_huffman_encode boats.raw.pgm       boats.comp
+	ls -l                boats.raw.pgm       boats.comp
+	@echo "----------------------------------------"
+	./pgm_huffman_encode smooth.raw.pgm      smooth.comp
+	ls -l                smooth.raw.pgm      smooth.comp
+	@echo "----------------------------------------"
 
 testDecompression: pgm_huffman_decode
 #
 # Generating Huffman decompressed images
 #
-	@echo "----------------------------------------"
-	./pgm_huffman_decode test_square.comp    test_square.decomp.pgm
+	./pgm_huffman_decode rectangle.comp      rectangle.decomp.pgm
 
 testComparingImages: compare_pgm_images
 #
 # Comparing images
 #
-	./compare_pgm_images gradient_small.pgm gradient_small.decomp.pgm
 	@echo "----------------------------------------"
 	./compare_pgm_images test_square.raw.pgm test_square.decomp.pgm
 	@echo "----------------------------------------"
@@ -269,7 +278,6 @@ testAll:
 #Clean all objected files and the executable file
 clean:
 	rm -f *.o
-	rm -f *.comp
 	rm -f  pgm_huffman_encode  pgm_huffman_decode compare_pgm_images
 
 
